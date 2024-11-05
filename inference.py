@@ -25,14 +25,14 @@ def prepare_image(img):
 
 
 def main():
-    # img_path = '/mnt/work/paper_reading/code_reading/MOVQGAN/test.jpeg'
-    img_path = '/mnt/work/paper_reading/code_reading/MOVQGAN/test2.jpg'
+    # set your own image path here
+    img_path = '.../test.jpg'
     img =  prepare_image(Image.open(img_path))
     orig_img = show_images(img[None, ...], True)
     device = torch.device('cpu' if not torch.cuda.is_available() else 'cuda:0')
     model = MOVQ().to(device) 
-    
-    state_dict = torch.load("/mnt/work/paper_reading/code_reading/MOVQGAN/movqgan_67M.ckpt")
+    # download the weights from https://github.com/ai-forever/MoVQGAN
+    state_dict = torch.load(".../MOVQGAN/movqgan_67M.ckpt")
     model.load_state_dict(state_dict)
     with torch.no_grad():
         model.eval()
